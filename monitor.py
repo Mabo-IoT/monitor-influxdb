@@ -65,18 +65,20 @@ class Monitor(object):
 
                     if self.process_memory > self.memory_limit:
                         output, err = self.process_restart()
-                        log.debug("Output:%s", ouput)
+                        log.debug("Output:%s", output)
                         log.debug("Error:%s", err)
+                        self.process = self.get_process(self.process_name)
                 
                 # keep fetch influxdb process if it is dead
                 else:
                     log.debug('No %s process, keep looking', self.process_name)
-                    self.get_process(self.process_name)
+                    self.process = self.get_process(self.process_name)
                 
                 time.sleep(1)
             except Exception as e:
                 log.error(e)
-                traceback.print_exc()
+                # traceback.print_exc()
+                self.process = self.get_process(self.process_name)
     
 if __name__ == '__main__':
     monitor = Monitor(conf['monitor'])
