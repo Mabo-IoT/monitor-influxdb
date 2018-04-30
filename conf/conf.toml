@@ -1,0 +1,15 @@
+
+[monitor]
+    process = 'influxd'
+    memory_limit = 102400
+    restart_cmd = 'service influxdb stop'
+
+[log]
+    console = true
+    console_level = 'DEBUG'   #'DEBUG','INFO','WARNING','ERROR','CRITICAL'
+    file = true
+    file_level = 'DEBUG'  #'DEBUG','INFO','WARNING','ERROR','CRITICAL'
+    log_file = 'logs/log.log'
+    backup_count = 5
+    max_size = 1024000
+    format_string = '(%(asctime)s), %(levelname)s, %(module)s, %(funcName)s, [%(lineno)d]: %(message)s'
